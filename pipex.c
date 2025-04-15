@@ -6,7 +6,7 @@
 /*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:02:24 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/15 20:53:05 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/04/15 21:05:06 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char *argv[], char *envp[])
 		print_error("Please enter the appropriate amount of inputs");
 	path_dir = get_path(envp);
 	extract_commands(path_dir, &cmd_1, argv[1]);
-	
+	printf("%s", cmd_1.cmd_path);
 	
 	int	index = -1;
 	while (cmd_1.args[++index])
