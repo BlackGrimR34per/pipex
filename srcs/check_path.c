@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 15:02:33 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/15 20:53:39 by yosherau         ###   ########.fr       */
+/*   Created: 2025/04/15 20:23:54 by yosherau          #+#    #+#             */
+/*   Updated: 2025/04/15 20:56:01 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../pipex.h"
 
-# include "./libft/libft.h"
-# include <stdio.h>
-
-typedef struct s_cmds
+int	check_path(char **str, t_cmds *cmd, char *cmd_str)
 {
-	char	*cmd_path;
-	char	**args;
-}	t_cmds;
+	int		index;
+	char	*path;
 
-int		check_path(char **str, t_cmds *cmd, char *cmd_str);
-void	extract_commands(char **path, t_cmds *cmd, char *cmd_str);
-char	**get_path(char *envp[]);
-void	print_error(char *msg);
-
-#endif
+	index = -1;
+	while (str[++index])
+	{
+		path = ft_strjoin(str[index], cmd_str);
+		if (access(path, F_OK | X_OK) == 0)
+		{
+			cmd->cmd_path = path;
+			return (0);
+		}
+	}
+	return (1);
+}

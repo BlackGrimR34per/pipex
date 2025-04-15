@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   extract_commands.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/07 15:02:33 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/15 20:53:39 by yosherau         ###   ########.fr       */
+/*   Created: 2025/04/15 19:45:02 by yosherau          #+#    #+#             */
+/*   Updated: 2025/04/15 20:53:23 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../pipex.h"
 
-# include "./libft/libft.h"
-# include <stdio.h>
-
-typedef struct s_cmds
+void	extract_commands(char **path, t_cmds *cmd, char *cmd_str)
 {
-	char	*cmd_path;
-	char	**args;
-}	t_cmds;
-
-int		check_path(char **str, t_cmds *cmd, char *cmd_str);
-void	extract_commands(char **path, t_cmds *cmd, char *cmd_str);
-char	**get_path(char *envp[]);
-void	print_error(char *msg);
-
-#endif
+	cmd->args = ft_split(cmd_str, ' ');
+	if (check_path(path, cmd, cmd->args[0]))
+		print_error("Please retry with an appropriate command\n");
+}
