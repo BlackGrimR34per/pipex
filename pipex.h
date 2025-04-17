@@ -6,7 +6,7 @@
 /*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:02:33 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/15 20:53:39 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:37:08 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "./libft/libft.h"
 # include <stdio.h>
+# include <fcntl.h>
+# include <sys/wait.h>
 
 typedef struct s_cmds
 {
