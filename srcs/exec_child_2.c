@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_path.c                                         :+:      :+:    :+:   */
+/*   exec_child_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 18:06:30 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/17 16:59:18 by yosherau         ###   ########.fr       */
+/*   Created: 2025/04/17 16:34:29 by yosherau          #+#    #+#             */
+/*   Updated: 2025/04/17 16:59:31 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-char	**get_path(char *envp[])
+void	exec_child_2(t_cmds *cmds, int *fds, char *file, char *envp[])
 {
-	char	*path;
-	int		index;
+	int	fd;
+	int	pid;
 
-	index = -1;
-	while (envp[++index])
-		if (ft_strncmp(envp[index], "PATH=", 5) == 0)
-			path = envp[index] + 5;
-	if (!path)
-		return (NULL);
-	return (ft_split(path, ':'));
+	pid = fork();
+	if (pid < 0)
+		return ;
+	if (pid == 0)
+	{
+		close(fds[1]);
+		fd = open(file, O_CREAT | O_WRONLY, 0777);
+		if (fd < 0)
+			return ;
+		dup2(fds[0], 0);
+		dup2(fd, 1);
+		execve(cmds->cmd_path, cmds->args, envp);
+	}
+	close(fds[0]);
+	wait(&pid);
 }
