@@ -6,7 +6,7 @@
 /*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:04:38 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/17 17:00:14 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:08:51 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	print_error(char *msg)
 {
 	perror(msg);
-	exit(1);
+	exit(errno);
 }

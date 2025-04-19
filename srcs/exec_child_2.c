@@ -6,7 +6,7 @@
 /*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:34:29 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/17 16:59:31 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:36:29 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exec_child_2(t_cmds *cmds, int *fds, char *file, char *envp[])
 	if (pid == 0)
 	{
 		close(fds[1]);
-		fd = open(file, O_CREAT | O_WRONLY, 0777);
+		fd = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd < 0)
 			return ;
 		dup2(fds[0], 0);
