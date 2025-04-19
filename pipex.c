@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yosherau <yosherau@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:02:24 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/19 16:37:17 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/04/19 22:43:11 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ int	main(int argc, char *argv[], char *envp[])
 	extract_commands(path_dir, &cmd_1, argv[2]);
 	extract_commands(path_dir, &cmd_2, argv[3]);
 	exec_child_1(&cmd_1, fd, argv[1], envp);
-	printf("Child 1: %d\n", errno);
 	exec_child_2(&cmd_2, fd, argv[4], envp);
-	printf("Child 2: %d\n", errno);
 	free_path(path_dir);
 	free_cmd(&cmd_1);
 	free_cmd(&cmd_2);

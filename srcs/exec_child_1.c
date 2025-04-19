@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yosherau <yosherau@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 15:46:13 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/19 16:28:47 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/04/20 00:26:58 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	exec_child_1(t_cmds *cmds, int *fds, char *file, char *envp[])
 		execve(cmds->cmd_path, cmds->args, envp);
 	}
 	close(fds[1]);
-	wait(&pid);
+	wait(NULL);
 }
