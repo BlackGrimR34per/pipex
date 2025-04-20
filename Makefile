@@ -6,7 +6,7 @@
 #    By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/07 13:41:35 by yosherau          #+#    #+#              #
-#    Updated: 2025/04/17 17:21:50 by yosherau         ###   ########.fr        #
+#    Updated: 2025/04/20 16:56:48 by yosherau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=			pipex
 
 CC			=			cc
 
-CFLAGS		=			-Wall -Wextra -Werror
+CFLAGS		=			-Wall -Wextra -Werror -g3
 
 RM			=			rm -rf
 
