@@ -6,7 +6,7 @@
 /*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:02:24 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/20 17:00:01 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/04/22 12:03:09 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,27 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_cmds	cmd_1;
-	// t_cmds	cmd_2;
+	pid_t	pid_1;
+	pid_t	pid_2;
 	int		fd[2];
-	char	**path_dir;
-	
+	int		w_status;
+	int		status_code;
+
 	if (argc != 5)
 		print_error("Please enter the appropriate amount of inputs");
-	pipe(fd);
-	path_dir = get_path(envp);
-	extract_commands(path_dir, &cmd_1, argv[2]);
-	// extract_commands(path_dir, &cmd_2, argv[3]);
-	exec_child_1(&cmd_1, fd, argv[1], envp);
-	printf("HERE\n");
-	// exec_child_2(&cmd_2, fd, argv[4], envp);
-	free_path(path_dir);
-	free_cmd(&cmd_1);
-	// free_cmd(&cmd_2);
+	if (pipe(fd) == -1)
+		return (1);
+	pid_1 = exec_child_1(envp, argv, fd);
+	pid_2 = exec_child_2(envp, argv, fd);
+	close(fd[0]);
+	close(fd[1]);
+	waitpid(pid_1, NULL, 0);
+	waitpid(pid_2, &w_status, 0);
+	if (WIFEXITED(w_status))
+	{
+		status_code = WEXITSTATUS(w_status);
+		if (status_code != 0)
+			exit(status_code);
+	}
+	return (0);
 }

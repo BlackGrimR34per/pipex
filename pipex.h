@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosherau <yosherau@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:02:33 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/20 14:26:49 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/04/22 11:56:13 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ typedef struct s_cmds
 	char	**args;
 }	t_cmds;
 
-int		check_path(char **str, t_cmds *cmd, char *cmd_str);
-void	exec_child_1(t_cmds *cmds, int *fds, char *file, char *envp[]);
-void	exec_child_2(t_cmds *cmds, int *fds, char *file, char *envp[]);
-void	extract_commands(char **path, t_cmds *cmd, char *cmd_str);
-void	free_cmd(t_cmds *cmds);
+int		check_path(t_cmds *cmd, char **path, char *cmd_str);
+pid_t	exec_child_1(char *envp[], char *argv[], int *fds);
+pid_t	exec_child_2(char *envp[], char *argv[], int *fds);
+void	extract_commands(t_cmds *cmd, char **path, char *arg_str);
+void	free_cmd_args(t_cmds *cmd);
+void	free_cmd(t_cmds *cmd);
 void	free_path(char **path);
 char	**get_path(char *envp[]);
 void	print_error(char *msg);
