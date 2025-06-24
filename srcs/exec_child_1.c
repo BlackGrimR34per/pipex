@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yosherau <yosherau@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 15:46:13 by yosherau          #+#    #+#             */
-/*   Updated: 2025/04/22 11:50:34 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/06/24 23:24:09 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ pid_t	exec_child_1(char *envp[], char *argv[], int *fds)
 		close(fds[0]);
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
-			exit(1);
+			print_error("");
 		path_dir = get_path(envp);
 		extract_commands(&cmd, path_dir, argv[2]);
 		dup2(fd, 0);
