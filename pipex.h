@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yosherau <yosherau@student.42kl.edu.my>    +#+  +:+       +#+        */
+/*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:02:33 by yosherau          #+#    #+#             */
-/*   Updated: 2025/06/27 00:23:05 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:18:46 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
+# include <stdbool.h>
 
 # define HERE_DOC "here_doc"
 
