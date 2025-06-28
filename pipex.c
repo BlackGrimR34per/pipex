@@ -6,7 +6,7 @@
 /*   By: yosherau <yosherau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 15:02:24 by yosherau          #+#    #+#             */
-/*   Updated: 2025/06/27 21:35:28 by yosherau         ###   ########.fr       */
+/*   Updated: 2025/06/28 15:33:16 by yosherau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,31 @@ int	handle_here_doc(char *limiter)
 
 void	handle_execution(char *argv[], int start, int input, int output)
 {
-	int	argc;
-	int	index;
-
-	(void)start;
-	(void)input;
-	(void)output;
+	int		argc;
+	int		index;
+	int		fds[2];
+	pid_t	pid;
 
 	argc = 0;
 	while (argv[argc])
 		argc++;
 	index = start;
-	while (++index < argc - 1)
-		
+	while (index < argc - 1)
+	{
+		pipe(fds);
+		pid = fork();
+		if (pid == 0)
+		{
+			dup2(input, STDIN_FILENO);
+			if (index != argc - 1)
+				dup2(fds[1], STD_OUT);
+			else
+				dup2(output, STD_OUT);
+			close(fds[0]);
+			close(fds[1]);
+		}
+		index++;
+	}
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -67,15 +79,15 @@ int	main(int argc, char *argv[], char *envp[])
 		print_error("Please enter the appropriate amount of inputs");
 	if (ft_strcmp(argv[1], HERE_DOC) == 0)
 	{
-		input_fd = handle_here_doc(argv[2]);	printf("%d\n", argc);
+		input_fd = handle_here_doc(argv[2]);
 		output_fd = open(argv[argc - 1], O_CREAT | O_WRONLY | O_APPEND);
-		handle_execution(argv, 0, 0, 0);
+		handle_execution(argv, 3, input_fd, output_fd);
 	}
 	else
 	{
 		input_fd = open(argv[1], O_RDONLY);
 		output_fd = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC);
-		handle_execution(argv, 0, 0, 0);
+		handle_execution(argv, 2, input_fd, output_fd);
 	}
 	// if (pipe(fd) == -1)
 	// 	return (1);
